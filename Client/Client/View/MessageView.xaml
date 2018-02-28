@@ -1,0 +1,106 @@
+﻿<Page
+    x:Class="Client.View.MessageView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Client.View"
+     xmlns:c="using:Client.Controls"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    DataContext="{Binding Source={StaticResource Locator},Path=Message}"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="Left">
+                <Grid HorizontalAlignment="Left">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Border CornerRadius="5" Background="LightGray" Padding="15">
+                        <TextBlock Text="{Binding Comment}"/>
+                    </Border>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <TextBlock Text="{Binding UserName}" Foreground="LightGray"/>
+                        <TextBlock Text="{Binding Published}" Foreground="LightGray" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="Right">
+                <Grid HorizontalAlignment="Right">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Border CornerRadius="5" Background="AliceBlue" Padding="15">
+                        <TextBlock Text="{Binding Comment}" Foreground="White"/>
+                    </Border>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Text="{Binding Published}" Foreground="LightGray" Margin="0,0,10,0"/>
+                        <TextBlock Text="{Binding UserName}" Foreground="LightGray"/>
+                    </StackPanel>
+                </Grid>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
+        <Border Background="LightGray" Grid.RowSpan="3"/>
+        <AutoSuggestBox PlaceholderText="搜索" VerticalAlignment="Center" Margin="20,20,20,10"/>
+        <ListView ItemsSource="{Binding ContactCollection}" SelectionMode="Single" SelectedItem="{Binding SelectedContact,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.RowSpan="2">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Border CornerRadius="5" Grid.RowSpan="2">
+                            <Image Source="/Assets/log.jpg" Stretch="UniformToFill" Width="60" Height="60"/>
+                        </Border>
+                        <TextBlock Text="{Binding UserName}" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="{Binding LastChatRecord}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Grid Grid.Column="1" BorderBrush="WhiteSmoke" Padding="20,20,20,10" BorderThickness="0,0,0,1">
+            <TextBlock Text="{Binding SelectedContact.UserName,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Button Content="..." HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        </Grid>
+        <ListView Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SelectedContact.ChatRecordCollection}">
+            <ListView.ItemTemplateSelector>
+                <c:ChatItemDataTemplateSelector LeftDataTemplate="{StaticResource Left}" RightDataTemplate="{StaticResource Right}"/>
+            </ListView.ItemTemplateSelector>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Margin" Value="5"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+        <Grid BorderBrush="LightGray" BorderThickness="0,1,0,0" Grid.Row="2" Grid.Column="1">
+            <c:SendMessageRichEditBox HorizontalAlignment="Stretch" 
+                         PlaceholderText="Press the Enter to send message"
+                         VerticalAlignment="Stretch"
+                         SendMessageCommand="{Binding SendMessageCommand}"/>
+        </Grid>
+    </Grid>
+</Page>
