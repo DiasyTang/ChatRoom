@@ -182,7 +182,7 @@
   <ItemGroup>
     <Reference Include="SocketBusiness, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SocketBusiness\SocketBusiness\bin\Release\SocketBusiness.dll</HintPath>
+      <HintPath>..\..\SocketBusiness\SocketBusiness\bin\Debug\SocketBusiness.dll</HintPath>
     </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

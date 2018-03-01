@@ -31,7 +31,7 @@ namespace Server
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            App.ServerSocket = SocketFactory.CreateInkSocket(true, null, "8080");
+            App.ServerSocket = SocketFactory.CreateInkSocket(true, GetLocalIp(), "8080");
             App.ServerSocket.OnStartFailed += ServerSocket_OnStartFailed;
             await App.ServerSocket.Start();
         }

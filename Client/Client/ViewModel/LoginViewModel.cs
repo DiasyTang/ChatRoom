@@ -25,7 +25,7 @@ namespace Client.ViewModel
         {
             MySelfUserName = name;
 
-            App.ClientSocket = SocketFactory.CreateInkSocket(false, "127.0.0.1", "8080") as ClientSocket;
+            App.ClientSocket = SocketFactory.CreateInkSocket(false, "192.168.1.105", "8080") as ClientSocket;
             App.ClientSocket.OnStartFailed += ClientSocket_OnStartFailed;
             App.ClientSocket.OnStartSucess += ClientSocket_OnStartSucess;
 
@@ -41,7 +41,7 @@ namespace Client.ViewModel
 
         private void ClientSocket_OnStartFailed(Exception e)
         {
-            throw new NotImplementedException();
+            throw e.InnerException;
         }
     }
 }
