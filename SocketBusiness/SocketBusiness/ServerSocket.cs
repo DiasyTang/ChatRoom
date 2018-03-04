@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Networking;
@@ -23,10 +24,7 @@ namespace SocketBusiness
         public override async void Dispose()
         {
             Working = false;
-            await SendMsg(new MessageModel
-            {
-                MessageType = MessageType.Disconnect
-            });
+            await SendMsg(new MessageModel { IsDisConnected=true});
             foreach(var clientSocket in ClientSockets)
             {
                 clientSocket.Dispose();
@@ -54,6 +52,7 @@ namespace SocketBusiness
                 Listener.ConnectionReceived += OnConnection;
                 var hostname = new HostName(IpAddress);
                 await Listener.BindEndpointAsync(hostname, RemoteServiceName);
+               
                 Working = true;
                 OnStartSucess?.Invoke();
             }

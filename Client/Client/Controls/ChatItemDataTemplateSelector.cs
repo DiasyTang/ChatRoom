@@ -1,5 +1,6 @@
 ﻿using Client.Model;
 using Client.ViewModel;
+using SocketBusiness;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Client.Controls
         public DataTemplate RightDataTemplate { get; set; }
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
-            if ((item as ChatRecord).UserName.Equals(LoginViewModel.MySelfUserName))
+            if ((item as MessageModel).Sender.Equals(LoginViewModel.MySelfUserName))
             {
                 return LeftDataTemplate;
             }

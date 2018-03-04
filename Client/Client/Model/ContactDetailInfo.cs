@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using SocketBusiness;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,7 +11,7 @@ namespace Client.Model
 {
     public class ContactDetailInfo : ViewModelBase
     {
-        private ObservableCollection<ChatRecord> chatRecordCollection;
+        private ObservableCollection<MessageModel> chatRecordCollection;
         private string userName;
         public string UserName
         {
@@ -27,7 +28,7 @@ namespace Client.Model
         public string Logo { get; set; }
         public string LastChatRecord { get; set; }
 
-        public ObservableCollection<ChatRecord> ChatRecordCollection
+        public ObservableCollection<MessageModel> ChatRecordCollection
         {
             get => chatRecordCollection;
             set

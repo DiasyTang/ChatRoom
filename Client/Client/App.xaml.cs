@@ -35,6 +35,7 @@ namespace Client
         }
 
         public static SocketBase ClientSocket { get; internal set; }
+        public static SocketBase ServerSocket { get; internal set; }
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points

@@ -20,10 +20,10 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Border CornerRadius="5" Background="LightGray" Padding="15">
-                        <TextBlock Text="{Binding Comment}"/>
+                        <TextBlock Text="{Binding Content}"/>
                     </Border>
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
-                        <TextBlock Text="{Binding UserName}" Foreground="LightGray"/>
+                        <TextBlock Text="{Binding Sender}" Foreground="LightGray"/>
                         <TextBlock Text="{Binding Published}" Foreground="LightGray" Margin="10,0,0,0"/>
                     </StackPanel>
                 </Grid>
@@ -36,11 +36,11 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Border CornerRadius="5" Background="AliceBlue" Padding="15">
-                        <TextBlock Text="{Binding Comment}" Foreground="White"/>
+                        <TextBlock Text="{Binding Content}" Foreground="White"/>
                     </Border>
                     <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
                         <TextBlock Text="{Binding Published}" Foreground="LightGray" Margin="0,0,10,0"/>
-                        <TextBlock Text="{Binding UserName}" Foreground="LightGray"/>
+                        <TextBlock Text="{Binding Sender}" Foreground="LightGray"/>
                     </StackPanel>
                 </Grid>
             </DataTemplate>
@@ -48,7 +48,7 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.ColumnDefinitions>
+        <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
@@ -97,6 +97,27 @@
             </ListView.ItemContainerStyle>
         </ListView>
         <Grid BorderBrush="LightGray" BorderThickness="0,1,0,0" Grid.Row="2" Grid.Column="1">
+            <c:SendMessageRichEditBox HorizontalAlignment="Stretch" 
+                         PlaceholderText="Press the Enter to send message"
+                         VerticalAlignment="Stretch"
+                         SendMessageCommand="{Binding SendMessageCommand}"/>
+        </Grid>-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
+        <ListView ItemsSource="{Binding ChatRecordCollection}">
+            <ListView.ItemTemplateSelector>
+                <c:ChatItemDataTemplateSelector LeftDataTemplate="{StaticResource Left}" RightDataTemplate="{StaticResource Right}"/>
+            </ListView.ItemTemplateSelector>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Margin" Value="5"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+        <Grid BorderBrush="LightGray" BorderThickness="0,1,0,0" Grid.Row="1">
             <c:SendMessageRichEditBox HorizontalAlignment="Stretch" 
                          PlaceholderText="Press the Enter to send message"
                          VerticalAlignment="Stretch"

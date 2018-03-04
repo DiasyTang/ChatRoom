@@ -100,7 +100,6 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\ChatRecord.cs" />
     <Compile Include="Model\ContactDetailInfo.cs" />
     <Compile Include="Model\SubNavigationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -180,10 +179,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="SocketBusiness, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SocketBusiness\SocketBusiness\bin\Debug\SocketBusiness.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\SocketBusiness\SocketBusiness\SocketBusiness.csproj">
+      <Project>{e5590daf-a25c-4890-ab35-add9907bed3c}</Project>
+      <Name>SocketBusiness</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

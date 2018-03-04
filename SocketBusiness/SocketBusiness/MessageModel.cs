@@ -7,22 +7,19 @@ using System.Threading.Tasks;
 
 namespace SocketBusiness
 {
-    public enum MessageType
-    {
-        Disconnect,
-        Connect,
-    }
-
     [DataContract]
     public class MessageModel
     {
-        [DataMember]
-        public MessageType MessageType { get; set; }
-
         [DataMember]
         public string Content { get; set; }
 
         [DataMember]
         public DateTime Published { get; set; }
+
+        [DataMember]
+        public string Sender { get; set; }
+
+        [DataMember]
+        public bool IsDisConnected { get; set; }
     }
 }

@@ -45,10 +45,8 @@ namespace SocketBusiness
 
         public async Task SendMsg(MessageModel msg,StreamSocket client = null)
         {
-            if (msg != null)
-            {
-                await SendData(client, JsonConvert.SerializeObject(msg));
-            }
+            client = client ?? Socket;
+            await SendData(client, JsonConvert.SerializeObject(msg));
         }
 
         private async Task SendData(StreamSocket client, string data)
@@ -60,7 +58,7 @@ namespace SocketBusiness
                 {
                     if (Writer == null)
                     {
-                        Writer = new DataWriter(Socket.OutputStream);
+                        Writer = new DataWriter(client.OutputStream);
                     }
                     await WriterData(data);
                 }
